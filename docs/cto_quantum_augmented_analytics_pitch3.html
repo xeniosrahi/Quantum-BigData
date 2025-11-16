@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quantum-Augmented Analytics Platform – CTO Pitch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --page-bg: #f3f4f6;
+      --surface: #f8f9fb;
+      --surface-alt: #ffffff;
+      --border-subtle: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --text-soft: #6b7280;
+      --accent-primary: #4f46e5;
+      --accent-secondary: #22c55e;
+      --accent-warn: #ec4899;
+    }
+
+    body {
+      background: var(--page-bg);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      background: var(--surface-alt) !important;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .navbar-brand {
+      color: var(--text-main) !important;
+      font-weight: 600;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--text-soft) !important;
+      font-size: 0.85rem;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--accent-primary) !important;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+      background: radial-gradient(circle at top left, #eef2ff 0%, #f9fafb 45%, #f3f4f6 100%);
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 3.4vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-main);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .badge-pill {
+      border-radius: 999px;
+      font-size: 0.78rem;
+      padding: 0.35rem 0.85rem;
+    }
+
+    .gradient-accent {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-warn));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    /* CARDS + COMMON */
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-header {
+      background: transparent;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .stat-pill {
+      padding: 0.75rem 1rem;
+      border-radius: 0.9rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+    }
+
+    .pill-list span {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      margin: 0.2rem 0.25rem;
+      color: var(--text-main);
+      background: var(--surface-alt);
+    }
+
+    .code-block {
+      background: #eef2ff;
+      border-radius: 0.85rem;
+      padding: 0.9rem 1rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      color: #111827;
+    }
+
+    .slide-anchor {
+      scroll-margin-top: 90px;
+    }
+
+    section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+      border-left: 2px solid var(--border-strong);
+      padding-left: 1.5rem;
+      margin-left: 0.2rem;
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 1.6rem;
+    }
+
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      left: -1.25rem;
+      top: 0.3rem;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
+    }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 1.2rem 0;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      background: var(--surface-alt);
+    }
+
+    @media (max-width: 767.98px) {
+      .hero {
+        padding-top: 5.5rem;
+      }
+
+      .hero-title {
+        font-size: 2.3rem;
+      }
+
+      .card {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="#top">
+      Quantum-Augmented Analytics
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav small">
+        <li class="nav-item"><a class="nav-link" href="#problem">Problem</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solution">Solution</a></li>
+        <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+        <li class="nav-item"><a class="nav-link" href="#quantum-value">Quantum Value</a></li>
+        <li class="nav-item"><a class="nav-link" href="#roadmap">Roadmap</a></li>
+        <li class="nav-item"><a class="nav-link" href="#risk">Risk & Governance</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section id="top" class="hero">
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+          <span class="badge bg-light border badge-pill text-secondary">
+            CTO Pitch • Architecture Vision
+          </span>
+          <span class="badge bg-success-subtle text-success border border-success badge-pill">
+            300 TB Scale
+          </span>
+        </div>
+        <h1 class="hero-title mb-3">
+          Quantum-Augmented Analytics Platform<br>
+          <span class="gradient-accent">From Big Data to Deep Patterns</span>
+        </h1>
+        <p class="hero-subtitle mb-3">
+          A production-grade architecture that combines classical big data infrastructure with
+          quantum hardware to unlock non-trivial patterns, optimization, and anomaly
+          detection across ~300 TB of enterprise data.
+        </p>
+        <p class="tagline mb-4">
+          Classical systems retain responsibility for volume and throughput. Quantum is introduced
+          as a controlled, high-impact augmentation for complexity, not as a replacement.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="#solution" class="btn btn-sm btn-primary px-3">
+            View Solution Overview
+          </a>
+          <a href="#architecture" class="btn btn-sm btn-outline-secondary px-3">
+            Jump to Architecture
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card border-0">
+          <div class="card-header pb-2">
+            <span class="section-kicker">Executive Snapshot</span>
+          </div>
+          <div class="card-body pt-2">
+            <div class="mb-3">
+              <div class="fw-semibold small mb-1">Strategic Objective</div>
+              <div class="small text-muted">
+                Establish a hybrid analytics foundation that:
+              </div>
+              <ul class="small text-muted mb-2">
+                <li>Operates at 300 TB scale using proven data infrastructure.</li>
+                <li>Uses quantum hardware selectively for high-complexity pattern extraction.</li>
+                <li>Preserves vendor optionality and minimizes lock-in.</li>
+              </ul>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <div class="stat-pill">
+                <div class="small text-muted">Data Footprint</div>
+                <div class="fw-semibold">≈ 300 TB</div>
+              </div>
+              <div class="stat-pill">
+                <div class="small text-muted">Pattern Focus</div>
+                <div class="fw-semibold">Clusters • Anomalies • Optimization</div>
+              </div>
+            </div>
+            <div class="code-block mt-2">
+<span class="text-muted">// Design stance</span><br>
+classical("scale") + quantum("complexity") →<br>
+&nbsp;&nbsp;&nbsp;&nbsp;enterprise_pattern_superpowers();
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+
+<section id="problem" class="slide-anchor">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-header">
+            <div class="section-kicker">Context</div>
+            <div class="section-title mb-0">The Problem We Are Actually Solving</div>
+          </div>
+          <div class="card-body small">
+            <p class="text-muted">
+              The organization is already capable of storing and querying large volumes of data.
+              The bottleneck has shifted from raw storage and basic analytics to identifying
+              non-obvious, high-value patterns in massive, multi-dimensional datasets.
+            </p>
+            <ul class="text-muted">
+              <li>Multiple data domains (telemetry, transactions, journeys, logs).</li>
+              <li>High event velocity and historical depth (300 TB+).</li>
+              <li>Standard BI and ML capture only surface-level relationships.</li>
+            </ul>
+            <p class="text-muted mb-1 fw-semibold">Key challenges:</p>
+            <ul class="text-muted mb-0">
+              <li>Combinatorial explosion in search and optimization tasks.</li>
+              <li>Subtle anomalies hidden within billions of “normal” events.</li>
+              <li>Non-linear, high-dimensional patterns across entities and time.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-header">
+            <div class="section-kicker">Why Quantum Now</div>
+            <div class="section-title mb-0">Strategic Motivation (CTO Lens)</div>
+          </div>
+          <div class="card-body small">
+            <p class="text-muted">
+              Quantum hardware is not yet a general-purpose compute replacement. However,
+              it is increasingly effective at specific classes of high-complexity problems:
+            </p>
+            <div class="pill-list mb-3">
+              <span>Optimization on large graphs</span>
+              <span>Quantum kernels for complex manifolds</span>
+              <span>Variational models for anomalies</span>
+              <span>Many-body-style structure discovery</span>
+            </div>
+            <p class="text-muted mb-2">
+              The goal is to integrate these capabilities in a way that:
+            </p>
+            <ul class="text-muted">
+              <li>Does not disrupt existing big data investments.</li>
+              <li>Provides a clear path from PoC to production.</li>
+              <li>Maintains optionality across quantum vendors and hardware roadmaps.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+
+<section id="solution" class="slide-anchor">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="card h-100">
+          <div class="card-header">
+            <div class="section-kicker">Solution Overview</div>
+            <div class="section-title mb-0">Quantum-Augmented Analytics Platform</div>
+          </div>
+          <div class="card-body small">
+            <p class="text-muted">
+              A layered platform where:
+            </p>
+            <ul class="text-muted">
+              <li>Classical infrastructure ingests, stores, and aggregates ~300 TB of data.</li>
+              <li>Feature and embedding layers compress raw events into dense semantic vectors.</li>
+              <li>A “Quantum Pattern Lab” consumes representative subsets of these vectors.</li>
+              <li>Quantum algorithms run in tightly scoped workflows to enhance clustering,
+                  anomaly detection, and combinatorial optimization.</li>
+            </ul>
+            <p class="text-muted">
+              Quantum outputs are not exposed directly. They are translated into:
+            </p>
+            <ul class="text-muted mb-0">
+              <li>Model parameters and decision boundaries.</li>
+              <li>Segments, scores, and optimization configurations.</li>
+              <li>Incremental uplift over strong classical baselines.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card h-100">
+          <div class="card-header">
+            <div class="section-kicker">Key Design Principles</div>
+            <div class="section-title mb-0">What Makes This Executable, Not Experimental</div>
+          </div>
+          <div class="card-body small">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <h6 class="fw-semibold mb-1">1. Classical-first for volume</h6>
+                <p class="text-muted mb-0">
+                  All heavy IO, transformations, and broad analytics stay on proven big data
+                  stacks (Spark/Flink/Trino/BigQuery on Parquet/ORC).
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-semibold mb-1">2. Quantum as a controlled sidecar</h6>
+                <p class="text-muted mb-0">
+                  Quantum is introduced only in targeted workflows via a dedicated sidecar lab,
+                  behind a gateway abstraction.
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-semibold mb-1">3. Vendor-agnostic integration</h6>
+                <p class="text-muted mb-0">
+                  The Quantum Gateway isolates the rest of the architecture from specific
+                  hardware vendors or modalities (neutral-atom today, others later).
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-semibold mb-1">4. Measurable uplift vs baselines</h6>
+                <p class="text-muted mb-0">
+                  Every quantum-assisted workflow has a classical baseline, and uplift is
+                  measured in precision/recall, revenue impact, cost savings, or risk reduction.
+                </p>
+              </div>
+            </div>
+            <div class="code-block mt-3">
+<span class="text-muted">// Platform invariant</span><br>
+if (!quantum_available) &#123;<br>
+&nbsp;&nbsp;run_classical_baseline();<br>
+&#125; else &#123;<br>
+&nbsp;&nbsp;baseline = run_classical_baseline();<br>
+&nbsp;&nbsp;uplift   = run_quantum_augmented(baseline);<br>
+&nbsp;&nbsp;ship_if(uplift &gt; threshold);<br>
+&#125;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+
+<section id="architecture" class="slide-anchor">
+
+
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8">
+        <div class="section-kicker">Target Architecture</div>
+        <div class="section-title">Component View: End-to-End Flow</div>
+        <p class="small text-muted mb-0">
+          The following view illustrates the flow from raw events to deployed quantum-augmented
+          patterns, with clear boundaries between classical and quantum responsibilities.
+        </p>
+      </div>
+    </div>
+
+<div class="card h-100">
+<div class="card-header">
+            <span class="fw-semibold small">Architecture Diagram</span>
+          </div>
+          <div class="mermaid">
+flowchart TD
+
+%% --------------------
+%% INGEST → FEATURES
+%% --------------------
+
+A[Ingestion & Raw Storage] --> B[Feature Engineering Layer]
+
+subgraph Ingestion
+    A1[Kafka / Pulsar / Kinesis]
+    A2[Parquet / ORC Storage]
+    A3[Iceberg / Delta Catalog]
+    A1 --> A2 --> A3 --> A
+end
+
+subgraph Feature_Engineering
+    B1[Spark / Flink / Trino]
+    B2[Feature Store]
+    B3[Embeddings Layer]
+    B1 --> B2 --> B3 --> B
+end
+
+%% --------------------
+%% CLASSICAL ANALYTICS
+%% --------------------
+
+B --> C[Classical Pattern Analytics]
+
+subgraph Classical_Analytics
+    C1[Clustering]
+    C2[PCA / UMAP]
+    C3[Isolation Forest]
+    C4[One-Class SVM]
+    C1 --> C2 --> C3 --> C4 --> C
+end
+
+%% --------------------
+%% QUANTUM LAB
+%% --------------------
+
+B --> D[Quantum Pattern Lab]
+
+subgraph Quantum_Lab
+    D1[Sampler Service]
+    D2[Quantum Gateway]
+    D3[Hybrid Engine]
+    D4[Result Reducer]
+    D1 --> D2 --> D3 --> D4 --> D
+end
+
+%% --------------------
+%% DEPLOYMENT
+%% --------------------
+
+C --> E[Pattern Deployment]
+D --> E
+
+subgraph Deployment
+    E1[MLflow Registry]
+    E2[REST / gRPC APIs]
+    E3[Batch & Streaming]
+    E1 --> E2 --> E3 --> E
+end
+
+%% --------------------
+%% CONSUMPTION
+%% --------------------
+
+E --> F[Consumption & Feedback]
+
+subgraph Consumption
+    F1[Dashboards]
+    F2[Fraud / Routing / CX / Ops]
+    F3[Feedback Loop]
+    F1 --> F2 --> F3 --> F
+end
+
+%% --------------------
+%% GOVERNANCE
+%% --------------------
+
+G[Governance Layer]
+G --- A
+G --- B
+G --- D
+G --- E
+
+subgraph Governance
+    G1[IAM / RBAC]
+    G2[Cost Controls]
+    G3[Audit & Lineage]
+    G1 --> G2 --> G3 --> G
+end
+</div>
+</div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="fw-semibold small">Layers 1–3: Data, Features & Baselines</span>
+          </div>
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-1">1. Ingestion & Raw Storage</h6>
+            <ul class="text-muted mb-2">
+              <li>Streaming via Kafka/Pulsar/Kinesis.</li>
+              <li>Batch via scheduled ETL/ELT jobs.</li>
+              <li>Storage: Parquet/ORC on object store (S3/GCS/Blob/HDFS).</li>
+              <li>Catalog: Iceberg/Delta/Hive for schema and partitions.</li>
+            </ul>
+
+            <h6 class="fw-semibold mb-1">2. Classical Analytics & Feature Engineering</h6>
+            <ul class="text-muted mb-2">
+              <li>Transformation engines: Spark/Flink/Trino/BigQuery.</li>
+              <li>Feature Store to manage and serve entity-level features.</li>
+              <li>Embedding pipelines using Autoencoders, GNNs, and sequence models.</li>
+            </ul>
+
+            <h6 class="fw-semibold mb-1">3. Classical Pattern Analytics</h6>
+            <ul class="text-muted mb-0">
+              <li>Clustering, dimensionality reduction, anomaly detection.</li>
+              <li>Establishes a strong baseline for pattern discovery.</li>
+              <li>Every quantum experiment compares against this baseline numerically.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="fw-semibold small">Layers 4–6: Quantum Lab, Serving & Feedback</span>
+          </div>
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-1">4. Quantum Pattern Lab</h6>
+            <ul class="text-muted mb-2">
+              <li><strong>Sampler Service</strong> selects representative embedding subsets.</li>
+              <li><strong>Quantum Gateway</strong> abstracts hardware vendors and modalities.</li>
+              <li><strong>Hybrid Engine</strong> runs QAOA, VQE, QSVM, and quantum kernels.</li>
+              <li><strong>Result Reducer</strong> converts bitstrings into segments, scores,
+                  and optimization recommendations.</li>
+            </ul>
+
+            <h6 class="fw-semibold mb-1">5. Pattern Deployment & Serving</h6>
+            <ul class="text-muted mb-2">
+              <li>Model Registry tracks classical and quantum-augmented models.</li>
+              <li>REST/gRPC services score entities, routes, transactions in real time.</li>
+              <li>Batch and streaming pipelines apply patterns to the full 300 TB footprint.</li>
+            </ul>
+
+            <h6 class="fw-semibold mb-1">6. Consumption & Feedback</h6>
+            <ul class="text-muted mb-0">
+              <li>Dashboards and notebooks for technical and business stakeholders.</li>
+              <li>Feedback loops that continuously refine embeddings and models.</li>
+              <li>Platform evolves as data, workloads, and hardware improve.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUANTUM VALUE -->
+
+<section id="quantum-value" class="slide-anchor">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-7">
+        <div class="section-kicker">Value Proposition</div>
+        <div class="section-title">Where Quantum Adds Material Value</div>
+        <p class="small text-muted mb-0">
+          Quantum is not used for generic SQL-style analytics. It is focused on areas where
+          classical approaches hit complexity walls: combinatorics, high-dimensional structure,
+          and subtle boundary definitions in feature space.
+     </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">1. Optimization at Realistic Scale</h6>
+            <p class="text-muted mb-2">
+              Use QAOA-style workflows to address:
+            </p>
+            <ul class="text-muted mb-0">
+              <li>Routing and scheduling across large graphs.</li>
+              <li>Feature subset selection for ML and risk models.</li>
+              <li>Configuration optimization (capacity, allocation, portfolios).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">2. Clusters & Anomalies in Complex Manifolds</h6>
+            <p class="text-muted mb-2">
+              Quantum kernels and variational models can:
+            </p>
+            <ul class="text-muted mb-0">
+              <li>Capture non-linear relationships not easily modeled classically.</li>
+              <li>Enhance anomaly detection in dense embedding spaces.</li>
+              <li>Refine segments beyond traditional clustering approaches.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">3. Strategic Capability & Optionality</h6>
+            <p class="text-muted mb-2">
+              Beyond immediate uplift, the platform:
+            </p>
+            <ul class="text-muted mb-0">
+              <li>Builds internal capability for quantum-era analytics.</li>
+              <li>Allows safe, governed experimentation with emerging hardware.</li>
+              <li>Positions the organization ahead of competitive adoption curves.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+
+<section id="roadmap" class="slide-anchor">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-7">
+        <div class="section-kicker">Execution Plan</div>
+        <div class="section-title">Roadmap: From PoC to Production</div>
+        <p class="small text-muted mb-0">
+          The roadmap is intentionally incremental: each phase creates tangible value on classical
+          infrastructure while adding quantum components in a controlled, measurable manner.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="card h-100">
+          <div class="card-body small">
+            <div class="timeline">
+              <div class="timeline-step">
+                <h6 class="fw-semibold mb-1">Phase 1 – Foundation (0–3 months)</h6>
+                <ul class="text-muted mb-0">
+                  <li>Confirm data lake structure, catalog, and feature store strategy.</li>
+                  <li>Implement initial embedding pipeline for one or two domains.</li>
+                  <li>Establish baseline classical clustering and anomaly models.</li>
+                </ul>
+              </div>
+              <div class="timeline-step">
+                <h6 class="fw-semibold mb-1">Phase 2 – Quantum Lab Pilot (3–6 months)</h6>
+                <ul class="text-muted mb-0">
+                  <li>Stand up Quantum Gateway with a selected hardware vendor.</li>
+                  <li>Implement Sampler Service and a simple Hybrid Engine workflow.</li>
+                  <li>Run side-by-side experiments on a narrow, high-value use case
+                      (e.g., fraud, routing, or segmentation).</li>
+                </ul>
+              </div>    <div class="timeline-step">
+                <h6 class="fw-semibold mb-1">Phase 3 – Productionization (6–12 months)</h6>
+                <ul class="text-muted mb-0">
+                  <li>Promote successful quantum-augmented models into the model registry.</li>
+                  <li>Integrate with real-time scoring services and batch pipelines.</li>
+                  <li>Expand to two additional domains with proven uplift.</li>
+                </ul>
+              </div>
+              <div class="timeline-step mb-0">
+                <h6 class="fw-semibold mb-1">Phase 4 – Scale & Governance (12+ months)</h6>
+                <ul class="text-muted mb-0">
+                  <li>Formalize quantum capability as part of data/ML platform strategy.</li>
+                  <li>Support multiple quantum vendors for redundancy and leverage.</li>
+                  <li>Standardize quantum experimentation playbooks for internal teams.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card h-100">
+          <div class="card-header">
+            <span class="fw-semibold small">CTO-Level Decision Inputs</span>
+          </div>
+          <div class="card-body small">
+            <p class="text-muted">
+              To move forward, the following decisions are typically required:
+            </p>
+            <ul class="text-muted">
+              <li>Selection of a primary quantum hardware / cloud partner for Phase 2.</li>
+              <li>Identification of 1–2 “hero” use cases with high signal-to-noise in outcomes
+                  (fraud, routing, risk, or personalization are common candidates).</li>
+              <li>Agreement on KPIs used to define “quantum uplift worth deploying”.</li>
+              <li>Assignment of an accountable owner (Head of Data/ML or equivalent) for the
+                  Quantum Pattern Lab as a product, not a one-off research project.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK & GOVERNANCE -->
+
+<section id="risk" class="slide-anchor">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-7">
+        <div class="section-kicker">Risk, Governance & Economics</div>
+        <div class="section-title">Managing Risk While Capturing Strategic Upside</div>
+        <p class="small text-muted mb-0">
+          The architecture is explicitly designed to contain technology risk, cost risk, and
+          organizational risk by isolating quantum workloads and ensuring graceful fallback to
+          classical-only execution.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">Technical & Delivery Risk</h6>
+            <ul class="text-muted mb-0">
+              <li>Quantum remains sidecar, not core dependency.</li>
+              <li>All pipelines run in classical-only mode if required.</li>
+              <li>Vendor abstraction allows hardware changes without full redesign.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">Governance & Access Control</h6>
+            <ul class="text-muted mb-0">
+              <li>IAM/RBAC restricts who can launch quantum workloads.</li>
+              <li>Cost guardrails and budgets on quantum job submission.</li>
+              <li>Full audit trail for models derived from quantum experiments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">Economics & ROI Framing</h6>
+            <ul class="text-muted mb-0">
+              <li>Target specific business metrics (fraud loss, route efficiency,
+                  conversion uplift) per use case.</li>
+              <li>Track incremental gains against classical-only baselines.</li>
+              <li>Treat Phase 2 as a controlled options bet on strategic capability,
+                  not as capex-heavy infrastructure replacement.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer mt-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div class="mb-2 mb-md-0">
+      Quantum-Augmented Analytics Platform · CTO Pitch
+    </div>
+    <div class="text-md-end">
+      Architecture &amp; narrative designed for executive review and strategic planning.
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+</script>
+</body>
+</html>card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">Governance & Access Control</h6>
+            <ul class="text-muted mb-0">
+              <li>IAM/RBAC restricts who can launch quantum workloads.</li>
+              <li>Cost guardrails and budgets on quantum job submission.</li>
+              <li>Full audit trail for models derived from quantum experiments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body small">
+            <h6 class="fw-semibold mb-2">Economics & ROI Framing</h6>
+            <ul class="text-muted mb-0">
+              <li>Target specific business metrics (fraud loss, route efficiency,
+                  conversion uplift) per use case.</li>
+              <li>Track incremental gains against classical-only baselines.</li>
+              <li>Treat Phase 2 as a controlled options bet on strategic capability,
+                  not as capex-heavy infrastructure replacement.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer mt-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div class="mb-2 mb-md-0">
+      Quantum-Augmented Analytics Platform · CTO Pitch
+    </div>
+    <div class="text-md-end">
+      Architecture &amp; narrative designed for executive review and strategic planning.
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+</script>
+</body>
+</html>
